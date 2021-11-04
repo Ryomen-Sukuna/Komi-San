@@ -16,12 +16,10 @@ Example for making new plugins
 from nksama import bot , help_message
 from pyrogram import filters
 
+
 @bot.on_message(filters.command('hi'))
-def hi(_,message):
+def hi(_, message):
   message.reply('hi')
-  
-
-
 ```
 
 # How to deploy ?
@@ -32,6 +30,5 @@ __Vars__ :
 API_ID - my.telegram.org
 API_HASH -  my.telegram.org
 BOT_TOKEN - @botfather
-MONGO_URL
-
+MONGO_URL - https://cloud.mongodb.com/
 ```
