@@ -31,7 +31,6 @@ def get_note(_, message):
         data = db.find_one({"chat_id": message.chat.id, "type": "note", "note_name": note})
         message.reply(data['text'])
 
-
     except Exception as e:
         send_log(e, "notes")
 
@@ -49,16 +48,16 @@ def gettnote(_, message):
 
 @bot.on_message(filters.command('notes'))
 def notes(_, message):
-    notes = None
+    notes_ = None
 
     for x in db.find({"chat_id": message.chat.id}):
-        if notes:
-            notes = f"__{notes}__\n __{x['note_name']}__"
+        if notes_:
+            notes_ = f"__{notes_}__\n __{x['note_name']}__"
 
         else:
-            notes = x['note_name']
+            notes_ = x['note_name']
 
-    message.reply(notes)
+    message.reply(notes_)
 
 
 @bot.on_message(filters.command('delnote'))
@@ -71,5 +70,6 @@ def delnote(_, message):
 
 help_message.append({
     "Module_Name": "notes",
-    "Notes_Help": "/addnote note name text - to add a note\n/delnote NoteName - to delete a note\ngetnote NoteName - get a note\n/notes - to get a list of notes in your chats"
+    "Notes_Help": "/addnote note name text - to add a note\n/delnote NoteName - to delete a note\ngetnote NoteName - "
+                  "get a note\n/notes - to get a list of notes in your chats "
 })

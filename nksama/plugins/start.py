@@ -31,14 +31,35 @@ def start(_, message):
     except Exception as e:
         bot.send_message(-1001646296281, f"error in adding stats:\n\n{e}")
 
-    if message.chat.type == "private" and not "help" in message.text:
-        bot.send_message(message.chat.id, "Hello there i'm Komi-San\nI'll help you to manage your groups",
-                         reply_markup=InlineKeyboardMarkup([
-                             [InlineKeyboardButton('help', callback_data="help")]
-                         ]))
+    if message.chat.type == "private" and "help" not in message.text:
+        bot.send_message(
+            message.chat.id,
+            "Hello there i'm Komi-San\nI'll help you to manage your groups",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            'help',
+                            callback_data="help",
+                        )
+                    ]
+                ]
+            )
+        )
     if "help" in message.text:
-        bot.send_message(message.chat.id, "Help", reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton('help', callback_data="help")]
-        ]))
+        bot.send_message(
+            message.chat.id,
+            "Help",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            'help',
+                            callback_data="help",
+                        )
+                    ]
+                ]
+            )
+        )
     if not message.chat.type == "private":
         message.reply("Hello there i'm komi san")

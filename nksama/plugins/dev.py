@@ -12,7 +12,7 @@ owner = 825664681
 
 
 @app.on_message(filters.user(owner) & filters.command("eval"))
-async def eval(client, message):
+async def evaluate(client, message):
     status_message = await message.reply_text("Processing ...")
     cmd = message.text.split(" ", maxsplit=1)[1]
 
@@ -97,5 +97,5 @@ async def invitelink(client, message):
         grouplink = await client.export_chat_invite_link(chat_id)
         await message.reply_text(f"{grouplink}")
 
-    except Exception as e:
+    except Exception:
         pass

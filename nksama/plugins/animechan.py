@@ -13,27 +13,48 @@ def callback_quotek(_, query):
         #         query.message.delete()
         kk = requests.get('https://animechan.vercel.app/api/random').json()
         anime = kk['anime']
-        quote = kk['quote']
+        quote_ = kk['quote']
         character = kk['character']
         caption = f"""
 **Anime:** `{anime}`
 **Character:** `{character}`
-**Quote:** `{quote}`"""
-        query.message.edit(caption, reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("Change", callback_data="quotek:change")],
-        ]))
+**Quote:** `{quote_}`"""
+        query.message.edit(
+            caption,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Change",
+                            callback_data="quotek:change"
+                        )
+                    ],
+                ]
+            )
+        )
 
 
 @bot.on_message(filters.command('quote'))
 def quote(_, message):
     kk = requests.get('https://animechan.vercel.app/api/random').json()
     anime = kk['anime']
-    quote = kk['quote']
+    quote_ = kk['quote']
     character = kk['character']
     caption = f"""
 **Anime:** `{anime}`
 **Character:** `{character}`
-**Quote:** `{quote}`"""
-    bot.send_message(message.chat.id, caption, reply_markup=InlineKeyboardMarkup([
-        [InlineKeyboardButton("Change", callback_data="quotek:change")]
-    ]))
+**Quote:** `{quote_}`"""
+    bot.send_message(
+        message.chat.id,
+        caption,
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Change",
+                        callback_data="quotek:change"
+                    )
+                ]
+            ]
+        )
+    )

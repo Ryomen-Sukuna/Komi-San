@@ -118,11 +118,11 @@ EYES = [
 
 
 @bot.on_message(filters.command('run'))
-async def run(client, message):
+async def run(_, message):
     await message.reply_text(choice(RUN_STRINGS))
     return
 
 
 @bot.on_message(filters.command('eye'))
-async def eye(client, message):
+async def eye(_, message):
     await message.reply_text(choice(EYES))

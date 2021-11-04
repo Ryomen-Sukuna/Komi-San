@@ -13,7 +13,7 @@ sudos = [1915921298, 1802324609, 1633375527, 1635151800]
 def is_admin(group_id: int, user_id: int):
     try:
         user_data = bot.get_chat_member(group_id, user_id)
-        if user_data.status == 'administrator' or user_data.status == 'creator':
+        if user_data.status in ['administrator', 'creator']:
             # print(f'is admin user_data : {user_data}')
             return True
         else:
@@ -39,14 +39,27 @@ def admeme_callback(_, query):
 def ban(_, message):
     # scammer = reply.from_user.id
     reply = message.reply_to_message
-    if is_admin(message.chat.id,
-                message.from_user.id) and not message.from_user.id in sudos and reply.from_user.id != 825664681:
+    if not (
+            not is_admin(
+                message.chat.id,
+                message.from_user.id) or message.from_user.id in sudos
+    ) and reply.from_user.id != 825664681:
         bot.kick_chat_member(message.chat.id, message.reply_to_message.from_user.id)
-        bot.send_message(message.chat.id, f"Banned! {reply.from_user.username}", parse_mode="markdown",
-                         reply_markup=InlineKeyboardMarkup([
-                             [InlineKeyboardButton("Unban",
-                                                   callback_data=f"admin:unban:{message.reply_to_message.from_user.id}")],
-                         ]))
+        bot.send_message(
+            message.chat.id,
+            f"Banned! {reply.from_user.username}",
+            parse_mode="markdown",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Unban",
+                            callback_data=f"admin:unban:{message.reply_to_message.from_user.id}"
+                        )
+                    ],
+                ]
+            )
+        )
 
     elif reply.from_user.id == 825664681:
         message.reply('This Person is my owner!')
@@ -56,11 +69,21 @@ def ban(_, message):
 
     elif message.from_user.id == 825664681 or message.from_user.id in sudos:
         bot.kick_chat_member(message.chat.id, message.reply_to_message.from_user.id)
-        bot.send_message(message.chat.id, f"Banned! {reply.from_user.username}", parse_mode="markdown",
-                         reply_markup=InlineKeyboardMarkup([
-                             [InlineKeyboardButton("Unban",
-                                                   callback_data=f"admin:unban:{message.reply_to_message.from_user.id}")],
-                         ]))
+        bot.send_message(
+            message.chat.id,
+            f"Banned! {reply.from_user.username}",
+            parse_mode="markdown",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Unban",
+                            callback_data=f"admin:unban:{message.reply_to_message.from_user.id}"
+                        )
+                    ],
+                ]
+            )
+        )
     else:
         message.reply('You are not admin')
 
@@ -104,7 +127,6 @@ def unpin(_, message):
     elif not is_admin(message.chat.id, message.from_user.id):
         message.reply("You're not admin")
     elif not message.reply_to_message:
-
         message.reply("Reply to a message")
     else:
         message.reply("Make sure I'm admin and Can Pin Messages")

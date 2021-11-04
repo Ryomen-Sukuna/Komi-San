@@ -15,19 +15,45 @@ def callback_meme(_, query):
         res = requests.get('https://nksamamemeapi.pythonanywhere.com').json()
         img = res['image']
         title = res['title']
-        bot.send_photo(query.message.chat.id, img, caption=title, reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("Next", callback_data="meme:next")],
-        ]))
+        bot.send_photo(
+            query.message.chat.id,
+            img,
+            caption=title,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Next",
+                            callback_data="meme:next"
+                        )
+                    ]
+                ]
+            )
+        )
 
 
 @bot.on_message(filters.command('rmeme'))
 def rmeme(_, message):
-    res = requests.get('https://nksamamemeapi.pythonanywhere.com').json()
+    res = requests.get(
+        'https://nksamamemeapi.pythonanywhere.com'
+    ).json()
     img = res['image']
     title = res['title']
-    bot.send_photo(message.chat.id, img, caption=title, reply_markup=InlineKeyboardMarkup([
-        [InlineKeyboardButton("Next", callback_data="meme:next")]
-    ]))
+    bot.send_photo(
+        message.chat.id,
+        img,
+        caption=title,
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Next",
+                        callback_data="meme:next"
+                    )
+                ]
+            ]
+        )
+    )
 
 
 @bot.on_message(filters.command('webss'))

@@ -29,6 +29,7 @@ async def vplay(_, message):
         pass
     reply = message.reply_to_message
     if reply:
+        fk = await message.reply('Downloading....')
         path = await reply.download()
         await calls.join(message.chat.id)
         await calls.start_video(path, repeat=False)

@@ -8,7 +8,9 @@ from nksama import bot
 def pat(_, message):
     reply = message.reply_to_message
     if reply:
-        res = requests.get('https://some-random-api.ml/animu/pat').json()
+        res = requests.get(
+            'https://some-random-api.ml/animu/pat'
+        ).json()
         url = res['link']
         reply.reply_animation(url)
 
