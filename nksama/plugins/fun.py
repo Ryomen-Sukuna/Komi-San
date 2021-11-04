@@ -1,12 +1,8 @@
-from pyrogram.types.bots_and_keyboards.inline_keyboard_button import InlineKeyboardButton
-from pyrogram.types.bots_and_keyboards.inline_keyboard_markup import InlineKeyboardMarkup
-from nksama import bot
-from pyrogram import filters
 from random import choice
-from pyrogram.types import Message
-import requests
-from nksama import help_message 
-from nksama.plugins.helpers import call_back_in_filter
+
+from pyrogram import filters
+
+from nksama import bot
 
 RUN_STRINGS = (
     "Now you see me, now you don't." "ε=ε=ε=ε=┌(;￣▽￣)┘",
@@ -120,12 +116,13 @@ EYES = [
     ["☯"],
 ]
 
-@bot.on_message(filters.command('run')) 
+
+@bot.on_message(filters.command('run'))
 async def run(client, message):
     await message.reply_text(choice(RUN_STRINGS))
     return
 
-@bot.on_message(filters.command('eye')) 
+
+@bot.on_message(filters.command('eye'))
 async def eye(client, message):
     await message.reply_text(choice(EYES))
-

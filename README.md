@@ -1,4 +1,5 @@
 # Komi-San
+
 Telegram Group Management Bot based on Pyrogram
 
 <b> More updates coming soon </b>
@@ -6,7 +7,7 @@ Telegram Group Management Bot based on Pyrogram
 [Support Group](https://t.me/Komisan_Support)
 
 <b> Open a Pull request
-if you wana contribute </b>
+if you wanna contribute </b>
 
 
 Example for making new plugins
@@ -22,7 +23,6 @@ def hi(_,message):
 
 
 ```
-
 
 # How to deploy ?
 

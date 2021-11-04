@@ -1,13 +1,12 @@
 import io
 import sys
 import traceback
-from nksama import bot as app
+
+import speedtest
 from pyrogram import filters
 from pyrogram.errors import RPCError
-import speedtest
-from nksama.plugins.admin import is_admin as admin
 
-
+from nksama import bot as app
 
 owner = 825664681
 
@@ -71,9 +70,8 @@ async def aexec(code, client, message):
     return await locals()["__aexec"](client, message)
 
 
-
 @app.on_message(filters.command("speedtest") & filters.user(owner))
-def speedtest_(_,message):
+def speedtest_(_, message):
     speed = speedtest.Speedtest()
     speed.get_best_server()
     speed.download()
@@ -81,6 +79,7 @@ def speedtest_(_,message):
     speedtest_image = speed.results.share()
 
     message.reply_photo(speedtest_image)
+
 
 @app.on_message(filters.command("leave") & filters.user(owner))
 async def leave(client, message):
@@ -90,13 +89,13 @@ async def leave(client, message):
     except RPCError as e:
         print(e)
 
+
 @app.on_message(filters.command("invitelink"))
 async def invitelink(client, message):
     chat_id = message.chat.id
     try:
         grouplink = await client.export_chat_invite_link(chat_id)
         await message.reply_text(f"{grouplink}")
-        
+
     except Exception as e:
         pass
-

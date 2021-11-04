@@ -1,6 +1,7 @@
-from pyrogram import filters , Client
+import os
+
+from pyrogram import Client
 from redis import Redis
-import os 
 
 bot = Client(
     'bot',
@@ -29,6 +30,5 @@ musicbot = Client(
     api_id=os.environ.get('API_ID'),
     api_hash=os.environ['API_HASH'],
 )
-
 
 help_message = []
